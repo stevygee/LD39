@@ -12,7 +12,6 @@ public class GameLogic {
 
 	static int guests = 10;
 	static int buildings = 2;
-
 	public static void init() {
 		Day.init();
 		Night.init();
@@ -51,7 +50,7 @@ public class GameLogic {
 		}
 
 		// Updates during Day / Night
-		if( isDay) {
+		if( isDay ) {
 			Day.update(delta);
 		} else {
 			Night.update(delta);
@@ -69,6 +68,7 @@ public class GameLogic {
 	}
 
 	public static void dispose() {
-
+		Day.dispose();
+		Night.dispose();
 	}
 }

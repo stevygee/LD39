@@ -49,4 +49,8 @@ public class Night {
 	private static void end() {
 		hasEnded = true;
 	}
+
+	public static void dispose() {
+		//music.dispose();
+	}
 }

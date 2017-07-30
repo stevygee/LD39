@@ -44,22 +44,22 @@ public class PowerManager {
 			}
 		}
 
-		Gdx.app.log("PowerMan", "Energy: " + energy + " Total capacity: " + energyCapacity);
+		//Gdx.app.log("PowerMan", "Energy: " + energy + " Total capacity: " + energyCapacity);
 	}
 
 	public static void addBattery() {
 		batteries++;
 		energyCapacity = batteries;
-		Gdx.app.log("PowerMan", "Added battery, new capacity: " + energyCapacity);
+		//Gdx.app.log("PowerMan", "Added battery, new capacity: " + energyCapacity);
 	}
 
 	public static void addSolarPanel() {
 		solarPanels++;
-		Gdx.app.log("PowerMan", "Added solar panel");
+		//Gdx.app.log("PowerMan", "Added solar panel");
 	}
 
 	public static void addEnergyUser() {
 		energyUsers++;
-		Gdx.app.log("PowerMan", "Added energy user");
+		//Gdx.app.log("PowerMan", "Added energy user");
 	}
 }

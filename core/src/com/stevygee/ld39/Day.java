@@ -1,6 +1,7 @@
 package com.stevygee.ld39;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
@@ -17,15 +18,24 @@ public class Day {
 
 	static float time;
 
+	static Music music;
+	static boolean musicPlaying = false;
+
 	public static void init() {
 		active = true;
 		hasEnded = false;
 		time = 0;
 
 		bgTex = new Texture("InselTag.png");
+		music = Gdx.audio.newMusic(Gdx.files.internal("DailyChill.mp3"));
 	}
 
 	public static void update(float delta) {
+		if( !musicPlaying ) {
+			music.play();
+			musicPlaying = true;
+		}
+
 		if( active ) {
 
 		} else {
@@ -33,8 +43,10 @@ public class Day {
 			time += delta;
 			if (time >= LENGTH) {
 				time = 0;
-
 				hasEnded = true;
+
+				music.stop();
+				musicPlaying = false;
 			} else {
 				// Charging batteries
 				PowerManager.update(delta);
@@ -52,5 +64,9 @@ public class Day {
 
 	public static void end() {
 		active = false;
+	}
+
+	public static void dispose() {
+		music.dispose();
 	}
 }
