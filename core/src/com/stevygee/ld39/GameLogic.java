@@ -1,6 +1,8 @@
 package com.stevygee.ld39;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
 public class GameLogic {
 
@@ -54,11 +56,11 @@ public class GameLogic {
 		}
 	}
 
-	public static void render() {
+	public static void render(SpriteBatch batch, ShapeRenderer shapeRenderer) {
 		if( isDay ) {
-			Day.render();
+			Day.render(batch, shapeRenderer);
 		} else {
-			Night.render();
+			Night.render(batch, shapeRenderer);
 		}
 	}
 

@@ -7,8 +7,8 @@ import com.stevygee.ld39.PartyIsland;
 public class DesktopLauncher {
 	public static void main (String[] arg) {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
-		config.width = 1600;
-		config.height = 1200;
+		config.width = 1920;
+		config.height = 1080;
 
 		new LwjglApplication(new PartyIsland(), config);
 	}

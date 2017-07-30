@@ -2,6 +2,9 @@ package com.stevygee.ld39;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
 public class Night {
 	public static final float LENGTH = 5;
@@ -11,10 +14,14 @@ public class Night {
 
 	static float time;
 
+	private static Texture bgTex;
+
 	public static void init() {
 		hasEnded = false;
 		powerFailures = 0;
 		time = 0;
+
+		bgTex = new Texture("InselNacht.png");
 	}
 
 	public static void update(float delta) {
@@ -33,13 +40,15 @@ public class Night {
 		//Gdx.app.log("Night", "Time: " + time);
 	}
 
-	public static void render() {
+	public static void render(SpriteBatch batch, ShapeRenderer shapeRenderer) {
 		if( PowerManager.isPowerOn ) {
-			Gdx.gl.glClearColor(0, 0, 0.2f, 1);
+			batch.begin();
+			batch.draw(bgTex, 0, 0, PartyIsland.NATIVE_WIDTH, PartyIsland.NATIVE_HEIGHT, 0, 0, PartyIsland.NATIVE_WIDTH, PartyIsland.NATIVE_HEIGHT, false, false);
+			batch.end();
 		} else {
 			Gdx.gl.glClearColor(0, 0, 0f, 1);
+			Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		}
-		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 	}
 
 	private static void end() {

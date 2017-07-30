@@ -2,12 +2,21 @@ package com.stevygee.ld39;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.badlogic.gdx.utils.viewport.Viewport;
 
 public class PartyIsland extends ApplicationAdapter {
-	public static Input input = new Input();
+	public static final int NATIVE_WIDTH = 512;
+	public static final int NATIVE_HEIGHT = 288;
+
+	private Viewport viewport;
+	private OrthographicCamera cam;
+	public static Input input;
+	private static SpriteBatch batch;
+	private static ShapeRenderer shapeRenderer;
 
 	private static float t = 0;
 	private final float dt = 1/100f; // 100 updates/second
@@ -20,6 +29,15 @@ public class PartyIsland extends ApplicationAdapter {
 
 	@Override
 	public void create() {
+		float w = Gdx.graphics.getWidth();
+		float h = Gdx.graphics.getHeight();
+		cam = new OrthographicCamera(16, 16 * (h / w));
+		cam.update();
+		viewport = new FitViewport(NATIVE_WIDTH, NATIVE_HEIGHT, cam);
+
+		batch = new SpriteBatch(200);
+		shapeRenderer = new ShapeRenderer(200);
+
 		input = new Input();
 		Gdx.input.setInputProcessor(input);
 
@@ -61,12 +79,26 @@ public class PartyIsland extends ApplicationAdapter {
 		}
 
 		// Really render
-		GameLogic.render();
-		UI.render();
+		cam.update();
+		batch.setProjectionMatrix(cam.combined);
+		shapeRenderer.setProjectionMatrix(cam.combined);
+
+		Gdx.gl.glClearColor(0, 0, 0, 1);
+		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
+		GameLogic.render(batch, shapeRenderer);
+		UI.render(batch, shapeRenderer);
+	}
+
+	@Override
+	public void resize(int width, int height) {
+		viewport.update(width, height, true);
 	}
 
 	@Override
 	public void dispose() {
 		GameLogic.dispose();
+		batch.dispose();
+		shapeRenderer.dispose();
 	}
 }

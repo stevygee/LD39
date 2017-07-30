@@ -47,10 +47,6 @@ public class PowerManager {
 		Gdx.app.log("PowerMan", "Energy: " + energy + " Total capacity: " + energyCapacity);
 	}
 
-	public void render() {
-
-	}
-
 	public static void addBattery() {
 		batteries++;
 		energyCapacity = batteries;
