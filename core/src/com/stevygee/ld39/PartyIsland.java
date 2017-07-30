@@ -7,6 +7,8 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class PartyIsland extends ApplicationAdapter {
+	public static Input input = new Input();
+
 	private static float t = 0;
 	private final float dt = 1/100f; // 100 updates/second
 	private float frameTime = 0f;
@@ -16,54 +18,32 @@ public class PartyIsland extends ApplicationAdapter {
 	private static int updates = 0;
 	public static float updatesPerSecond = 0;
 
-	SpriteBatch batch;
-	Texture img;
-
-	// TODO: People per day array (FILO)
-	// TODO: People leaving
-
-	int power = 10;
-	int people = 10;
-	int buildings = 2;
-
-	float dayLength = 2;
-	float time = 0;
-	
 	@Override
-	public void create () {
-		batch = new SpriteBatch();
-		img = new Texture("badlogic.jpg");
+	public void create() {
+		Gdx.input.setInputProcessor(input);
+
+		GameLogic.init();
 	}
 
 	public void update(float delta) {
-		time += delta;
-		time = Math.min(time, dayLength);
-		if( time == dayLength ) {
-			time = 0;
-
-			int oldPeople = people;
-			people += (people * 0.1) + (buildings * 4);
-			int deltaPeople = people - oldPeople;
-			Gdx.app.log("Test", "Day over! " + deltaPeople + " people come to the island");
-			Gdx.app.log("Test", people + " people are on the island.");
-		}
+		GameLogic.update(delta);
 	}
 
 	@Override
-	public void render () {
+	public void render() {
 		// "Free the physics" game loop
 		// see: http://gafferongames.com/game-physics/fix-your-timestep/
 		// TODO: Implement "the final touch"
 		// TODO: Implement integrator
 
 		frameTime = Gdx.graphics.getRawDeltaTime();
-		frameTime = Math.min(0.25f, frameTime); // note: max frame time to avoid spiral of death
+		frameTime = Math.min(0.25f, frameTime); // Note: Max frame time to avoid spiral of death
 
 		accumulator += frameTime;
 		secondAccumulator += frameTime;
 
 		while( accumulator >= dt ) {
-			// update current game state
+			// Update current game state
 			update(dt);
 
 			accumulator -= dt;
@@ -78,17 +58,12 @@ public class PartyIsland extends ApplicationAdapter {
 			updates = 0;
 		}
 
-		// really render
-		Gdx.gl.glClearColor(1, 0, 0, 1);
-		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		batch.begin();
-		batch.draw(img, 0, 0);
-		batch.end();
+		// Really render
+		GameLogic.render();
 	}
-	
+
 	@Override
-	public void dispose () {
-		batch.dispose();
-		img.dispose();
+	public void dispose() {
+		GameLogic.dispose();
 	}
 }
