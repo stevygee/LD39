@@ -25,6 +25,10 @@ public class Input implements InputProcessor {
 			if( keycode == Keys.NUM_2 ) {
 				PowerManager.addSolarPanel();
 			}
+
+			if( keycode == Keys.NUM_3 ) {
+				PowerManager.addEnergyUser();
+			}
 		}
 		return false;
 	}

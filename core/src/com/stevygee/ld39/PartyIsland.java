@@ -20,8 +20,10 @@ public class PartyIsland extends ApplicationAdapter {
 
 	@Override
 	public void create() {
+		input = new Input();
 		Gdx.input.setInputProcessor(input);
 
+		UI.init();
 		GameLogic.init();
 	}
 
@@ -60,6 +62,7 @@ public class PartyIsland extends ApplicationAdapter {
 
 		// Really render
 		GameLogic.render();
+		UI.render();
 	}
 
 	@Override

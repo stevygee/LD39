@@ -7,7 +7,7 @@ public class PowerManager {
 	static int solarPanels;
 
 	private static float time;
-	private static float energy;
+	static float energy;
 	static float energyCapacity;
 	static int energyUsers;
 
@@ -47,6 +47,10 @@ public class PowerManager {
 		Gdx.app.log("PowerMan", "Energy: " + energy + " Total capacity: " + energyCapacity);
 	}
 
+	public void render() {
+
+	}
+
 	public static void addBattery() {
 		batteries++;
 		energyCapacity = batteries;
@@ -56,5 +60,10 @@ public class PowerManager {
 	public static void addSolarPanel() {
 		solarPanels++;
 		Gdx.app.log("PowerMan", "Added solar panel");
+	}
+
+	public static void addEnergyUser() {
+		energyUsers++;
+		Gdx.app.log("PowerMan", "Added energy user");
 	}
 }
