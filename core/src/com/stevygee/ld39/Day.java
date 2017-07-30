@@ -4,7 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 
 public class Day {
-	public static final float LENGTH = 2;
+	public static final float LENGTH = 1f;
 
 	public static boolean hasEnded;
 	public static boolean active;

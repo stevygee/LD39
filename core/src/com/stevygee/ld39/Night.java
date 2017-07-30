@@ -4,7 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 
 public class Night {
-	public static final float LENGTH = 2;
+	public static final float LENGTH = 5;
 
 	public static boolean hasEnded;
 	static int powerFailures;

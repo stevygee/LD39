@@ -27,11 +27,11 @@ public class PowerManager {
 
 		if( GameLogic.isDay ) {
 			// Charge
-			energy += delta * solarPanels * 0.5f;
+			energy += delta * solarPanels * 2f;
 			energy = Math.min(energy, energyCapacity);
 		} else {
 			// Drain
-			float requestedEnergy = delta * energyUsers;
+			float requestedEnergy = delta * energyUsers * 0.1f;
 
 			if( energy < requestedEnergy ) {
 				// Power failure!
