@@ -11,7 +11,7 @@ public class GameLogic {
 	// TODO: People leaving
 
 	static int power = 10;
-	static int people = 10;
+	static int guests = 10;
 	static int buildings = 2;
 
 	public static void init() {
@@ -39,11 +39,11 @@ public class GameLogic {
 			// A new day
 			Gdx.app.log("GameLogic", "--- DAY ---");
 
-			int oldPeople = people;
-			people += (people * 0.1) + (buildings * 4);
-			int deltaPeople = people - oldPeople;
-			Gdx.app.log("GameLogic", "Good morning! " + deltaPeople + " people come to the island");
-			Gdx.app.log("GameLogic", people + " people are on the island.");
+			int arriving = (int)Math.floor( (guests * 0.1f) + (buildings * 4f) );
+			int leaving = (int)Math.floor( guests * 0.3f * (float)Night.powerFailures );
+			guests += arriving - leaving;
+			Gdx.app.log("GameLogic", "Good morning! " + arriving + " guests come to the island, " + leaving + " left.");
+			Gdx.app.log("GameLogic", guests + " guests are on the island.");
 
 			Day.init();
 		}
