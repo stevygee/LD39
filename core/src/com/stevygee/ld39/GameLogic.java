@@ -5,7 +5,6 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
 public class GameLogic {
-
 	static boolean isDay = true;
 	static int currentDay = 1;
 
@@ -17,7 +16,10 @@ public class GameLogic {
 	public static void init() {
 		Day.init();
 		Night.init();
-		PowerManager.init(3, 1, 2);
+		World.init();
+		World.addBattery(3);
+		World.addSolar(1);
+		PowerManager.init(World.noBatteries, World.noSolarPanels, buildings);
 	}
 
 	public static void update(float delta) {
@@ -62,6 +64,8 @@ public class GameLogic {
 		} else {
 			Night.render(batch, shapeRenderer);
 		}
+
+		World.render(batch, shapeRenderer);
 	}
 
 	public static void dispose() {

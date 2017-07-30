@@ -19,16 +19,15 @@ public class Input implements InputProcessor {
 			}
 
 			if( keycode == Keys.NUM_1 ) {
-				PowerManager.addBattery();
+				World.addBattery(1);
 			}
 
 			if( keycode == Keys.NUM_2 ) {
-				PowerManager.addSolarPanel();
+				World.addSolar(1);
 			}
 
 			if( keycode == Keys.NUM_3 ) {
-				GameLogic.buildings++;
-				PowerManager.addEnergyUser();
+				World.addHotel(1);
 			}
 		}
 		return false;

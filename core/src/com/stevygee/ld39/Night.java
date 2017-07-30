@@ -41,14 +41,9 @@ public class Night {
 	}
 
 	public static void render(SpriteBatch batch, ShapeRenderer shapeRenderer) {
-		if( PowerManager.isPowerOn ) {
-			batch.begin();
-			batch.draw(bgTex, 0, 0, PartyIsland.NATIVE_WIDTH, PartyIsland.NATIVE_HEIGHT, 0, 0, PartyIsland.NATIVE_WIDTH, PartyIsland.NATIVE_HEIGHT, false, false);
-			batch.end();
-		} else {
-			Gdx.gl.glClearColor(0, 0, 0f, 1);
-			Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		}
+		batch.begin();
+		batch.draw(bgTex, 0, 0, PartyIsland.NATIVE_WIDTH, PartyIsland.NATIVE_HEIGHT, 0, 0, PartyIsland.NATIVE_WIDTH, PartyIsland.NATIVE_HEIGHT, false, false);
+		batch.end();
 	}
 
 	private static void end() {
