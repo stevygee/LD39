@@ -27,6 +27,7 @@ public class Input implements InputProcessor {
 			}
 
 			if( keycode == Keys.NUM_3 ) {
+				GameLogic.buildings++;
 				PowerManager.addEnergyUser();
 			}
 		}

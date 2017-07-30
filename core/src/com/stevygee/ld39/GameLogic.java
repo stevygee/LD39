@@ -8,9 +8,7 @@ public class GameLogic {
 	static int currentDay = 1;
 
 	// TODO: People per day array (FILO)
-	// TODO: People leaving
 
-	static int power = 10;
 	static int guests = 10;
 	static int buildings = 2;
 
