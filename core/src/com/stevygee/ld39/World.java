@@ -34,7 +34,7 @@ public class World {
 
 	public static void init() {
 		powerLots = new int[8][1];
-		hotelLots = new int[10][2];
+		hotelLots = new int[10][5];
 
 		hotelPosition = new Vector2(4,4);
 		powerPosition = new Vector2(4,6);

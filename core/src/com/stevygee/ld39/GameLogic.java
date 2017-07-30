@@ -16,9 +16,11 @@ public class GameLogic {
 		Day.init();
 		Night.init();
 		World.init();
+		PowerManager.init();
+
+		World.addHotel(buildings);
 		World.addBattery(3);
 		World.addSolar(1);
-		PowerManager.init(World.noBatteries, World.noSolarPanels, buildings);
 	}
 
 	public static void update(float delta) {

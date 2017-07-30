@@ -13,10 +13,10 @@ public class PowerManager {
 
 	public static boolean isPowerOn;
 
-	public static void init(int batteries, int solarPanels, int energyUsers) {
-		PowerManager.batteries = batteries;
-		PowerManager.solarPanels = solarPanels;
-		PowerManager.energyUsers = energyUsers;
+	public static void init() {
+		PowerManager.batteries = 0;
+		PowerManager.solarPanels = 0;
+		PowerManager.energyUsers = 0;
 		time = 0;
 		energyCapacity = batteries;
 		isPowerOn = true;
