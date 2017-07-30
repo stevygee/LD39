@@ -10,6 +10,10 @@ public class World {
 	static final int LOT_BATTERY = 2;
 	static final int LOT_HOTEL = 3;
 
+	static final int HOTEL_PRICE = 10000;
+	static final int SOLAR_PRICE = 2000;
+	static final int BATTERY_PRICE = 5000;
+
 	static int[][] powerLots;
 	static int[][] hotelLots;
 	static Vector2 hotelPosition;
@@ -71,7 +75,11 @@ public class World {
 		}
 	}
 
-	public static void addSolar(int no) {
+	public static void addSolar(int no, float priceModifier) {
+		if( !GameLogic.spendMoney(SOLAR_PRICE * priceModifier) ) {
+			return;
+		}
+
 		for(int i = 0; i < no; i++) {
 			add(LOT_SOLAR, powerLots);
 			PowerManager.addSolarPanel();
@@ -79,7 +87,11 @@ public class World {
 		}
 	}
 
-	public static void addBattery(int no) {
+	public static void addBattery(int no, float priceModifier) {
+		if( !GameLogic.spendMoney(BATTERY_PRICE * priceModifier) ) {
+			return;
+		}
+
 		for(int i = 0; i < no; i++) {
 			add(LOT_BATTERY, powerLots);
 			PowerManager.addBattery();
@@ -87,7 +99,11 @@ public class World {
 		}
 	}
 
-	public static void addHotel(int no) {
+	public static void addHotel(int no, float priceModifier) {
+		if( !GameLogic.spendMoney(HOTEL_PRICE * priceModifier) ) {
+			return;
+		}
+
 		for(int i = 0; i < no; i++) {
 			add(LOT_HOTEL, hotelLots);
 			GameLogic.buildings++;

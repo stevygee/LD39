@@ -12,15 +12,17 @@ public class GameLogic {
 
 	static int guests = 10;
 	static int buildings = 2;
+	static int funds = 10000;
+
 	public static void init() {
 		Day.init();
 		Night.init();
 		World.init();
 		PowerManager.init();
 
-		World.addHotel(buildings);
-		World.addBattery(3);
-		World.addSolar(1);
+		World.addHotel(buildings, 0);
+		World.addBattery(3, 0);
+		World.addSolar(1, 0);
 	}
 
 	public static void update(float delta) {
@@ -42,6 +44,10 @@ public class GameLogic {
 			// A new day
 			Gdx.app.log("GameLogic", "--- DAY ---");
 
+			float income = guests * 100;
+			gettingMoney(income);
+			Gdx.app.log("GameLogic", "Made " + income + "$, Funds: " + funds + "$");
+
 			int arriving = (int)Math.floor( (guests * 0.1f) + (buildings * 4f) );
 			int leaving = (int)Math.floor( guests * 0.3f * (float)Night.powerFailures );
 			guests += arriving - leaving;
@@ -56,6 +62,23 @@ public class GameLogic {
 			Day.update(delta);
 		} else {
 			Night.update(delta);
+		}
+	}
+
+	public static void gettingMoney(float amount) {
+		funds += amount;
+		Gdx.app.log("GameLogic", "Getting " + amount + "$");
+		Gdx.app.log("GameLogic", "Funds: " + funds + "$");
+	}
+
+	public static boolean spendMoney(float amount) {
+		if( funds < amount ) {
+			return false;
+		} else {
+			funds -= amount;
+			Gdx.app.log("GameLogic", "Spending " + amount + "$");
+			Gdx.app.log("GameLogic", "Funds: " + funds + "$");
+			return true;
 		}
 	}
 
