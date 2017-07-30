@@ -23,13 +23,22 @@ public class Night {
 			time = 0;
 
 			end();
+		} else {
+			// Draining batteries
+			if( PowerManager.isPowerOn ) {
+				PowerManager.update(delta);
+			}
 		}
 
-		Gdx.app.log("Night", "Time: " + time);
+		//Gdx.app.log("Night", "Time: " + time);
 	}
 
 	public static void render() {
-		Gdx.gl.glClearColor(0, 0, 0.2f, 1);
+		if( PowerManager.isPowerOn ) {
+			Gdx.gl.glClearColor(0, 0, 0.2f, 1);
+		} else {
+			Gdx.gl.glClearColor(0, 0, 0f, 1);
+		}
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 	}
 

@@ -21,14 +21,18 @@ public class Day {
 		if( active ) {
 
 		} else {
+			// Passive
 			time += delta;
 			if (time >= LENGTH) {
 				time = 0;
 
 				hasEnded = true;
+			} else {
+				// Charging batteries
+				PowerManager.update(delta);
 			}
 
-			Gdx.app.log("Day", "Time: " + time);
+			//Gdx.app.log("Day", "Time: " + time);
 		}
 	}
 

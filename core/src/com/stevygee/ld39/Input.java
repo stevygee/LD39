@@ -12,11 +12,19 @@ public class Input implements InputProcessor {
 
 	@Override
 	public boolean keyUp(int keycode) {
-		Gdx.app.log("Input", "Enter");
-		if( GameLogic.isDay && keycode == Keys.ENTER ) {
-			Day.end();
-			Gdx.app.log("Input", "Enter isday");
-			return true;
+		if( GameLogic.isDay ) {
+			if( keycode == Keys.ENTER ) {
+				Day.end();
+				return true;
+			}
+
+			if( keycode == Keys.NUM_1 ) {
+				PowerManager.addBattery();
+			}
+
+			if( keycode == Keys.NUM_2 ) {
+				PowerManager.addSolarPanel();
+			}
 		}
 		return false;
 	}

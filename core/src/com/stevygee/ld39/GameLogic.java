@@ -17,6 +17,7 @@ public class GameLogic {
 	public static void init() {
 		Day.init();
 		Night.init();
+		PowerManager.init(3, 1, 2);
 	}
 
 	public static void update(float delta) {
@@ -25,21 +26,25 @@ public class GameLogic {
 			// Day just ended
 			isDay = !isDay;
 
-			Gdx.app.log("Night", "has ended, power failures: " + Night.powerFailures);
-
 			// Tonight's the night...
+			Gdx.app.log("GameLogic", "--- NIGHT ---");
 			Night.init();
 		} else if( !isDay && Night.hasEnded ) {
 			// Night just ended
 			isDay = !isDay;
+			PowerManager.isPowerOn = true;
+
+			Gdx.app.log("Night", "has ended, power failures: " + Night.powerFailures);
+
+			// A new day
+			Gdx.app.log("GameLogic", "--- DAY ---");
 
 			int oldPeople = people;
 			people += (people * 0.1) + (buildings * 4);
 			int deltaPeople = people - oldPeople;
-			Gdx.app.log("GameLogic", "Day over! " + deltaPeople + " people come to the island");
+			Gdx.app.log("GameLogic", "Good morning! " + deltaPeople + " people come to the island");
 			Gdx.app.log("GameLogic", people + " people are on the island.");
 
-			// A new day
 			Day.init();
 		}
 
