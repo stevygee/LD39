@@ -4,14 +4,32 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 
 public class Day {
+	public static final float LENGTH = 2;
+
 	public static boolean hasEnded;
+	public static boolean active;
+
+	static float time;
 
 	public static void init() {
+		active = true;
 		hasEnded = false;
+		time = 0;
 	}
 
 	public static void update(float delta) {
+		if( active ) {
 
+		} else {
+			time += delta;
+			if (time >= LENGTH) {
+				time = 0;
+
+				hasEnded = true;
+			}
+
+			Gdx.app.log("Day", "Time: " + time);
+		}
 	}
 
 	public static void render() {
@@ -20,6 +38,6 @@ public class Day {
 	}
 
 	public static void end() {
-		hasEnded = true;
+		active = false;
 	}
 }

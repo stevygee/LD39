@@ -33,7 +33,7 @@ public class Night {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 	}
 
-	public static void end() {
+	private static void end() {
 		hasEnded = true;
 	}
 }
