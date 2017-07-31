@@ -9,7 +9,9 @@ public class GameLogic {
 	static boolean isDay = true;
 	static int currentDay = 1;
 
-	// TODO: People per day array (FILO)
+	static int goalDay = 3;
+	static int goalGuests = 10;
+	static boolean gameOver = false;
 
 	static int guests = 0;
 	static IntArray guestsBuffer;
@@ -70,8 +72,21 @@ public class GameLogic {
 			Gdx.app.log("GameLogic", "Good morning! " + arriving + " guests come to the island, " + leaving + " left.");
 			Gdx.app.log("GameLogic", guests + " guests are on the island.");
 
-			Day.reset();
-			currentDay++;
+			if( currentDay >= goalDay ) {
+				gameOver = true;
+			} else {
+				Day.reset();
+				currentDay++;
+			}
+		}
+
+		if( gameOver ) {
+			if( guests >= goalGuests ) {
+				Gdx.app.log("GameLogic", "You won!");
+			} else {
+				Gdx.app.log("GameLogic", "Try again!");
+			}
+			return;
 		}
 
 		// Updates during Day / Night
