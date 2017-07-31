@@ -1,6 +1,7 @@
 package com.stevygee.ld39;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -14,22 +15,39 @@ public class Night {
 
 	static float time;
 
+	static Music music;
+	static boolean musicPlaying = false;
+
 	private static Texture bgTex;
 
 	public static void init() {
+		reset();
+
+		bgTex = new Texture("InselNacht.png");
+		music = Gdx.audio.newMusic(Gdx.files.internal("DanceLounge.mp3"));
+		music.setLooping(true);
+	}
+
+	public static void reset() {
 		hasEnded = false;
 		powerFailures = 0;
 		time = 0;
-
-		bgTex = new Texture("InselNacht.png");
 	}
 
 	public static void update(float delta) {
+		if( !musicPlaying ) {
+			music.play();
+			musicPlaying = true;
+		}
+
 		time += delta;
 		if( time >= LENGTH ) {
 			time = 0;
 
 			end();
+
+			music.pause();
+			musicPlaying = false;
 		} else {
 			// Draining batteries
 			if( PowerManager.isPowerOn ) {

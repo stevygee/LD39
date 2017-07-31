@@ -38,7 +38,7 @@ public class GameLogic {
 
 			// Tonight's the night...
 			Gdx.app.log("GameLogic", "--- NIGHT ---");
-			Night.init();
+			Night.reset();
 		} else if( currentDay == 1 || !isDay && Night.hasEnded ) {
 			if( currentDay != 1 ) {
 				// Night just ended
