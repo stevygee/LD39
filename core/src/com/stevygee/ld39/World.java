@@ -38,7 +38,7 @@ public class World {
 
 	public static void init() {
 		powerLots = new int[8][1];
-		hotelLots = new int[10][5];
+		hotelLots = new int[10][4];
 
 		hotelPosition = new Vector2(4,4);
 		powerPosition = new Vector2(4,6);
@@ -58,21 +58,26 @@ public class World {
 
 	}
 
-	public static void add(int type, int[][] array) {
+	public static boolean add(int type, int[][] array, int noOccupied) {
 		boolean added = false;
 
-		for(int i = 0; i < array[0].length; i++) {
-			for(int j = 0; j < array.length; j++) {
-				if( array[j][i] == 0 ) {
-					array[j][i] = type;
+		if( noOccupied >= array.length * array[0].length ) {
+			return false;
+		}
+
+		while(!added) {
+			int r = (int)Math.floor(Math.random() * array.length);
+
+			for(int j = 0; j < array[r].length; j++) {
+				if( array[r][j] == 0 ) {
+					array[r][j] = type;
 					added = true;
 					break;
 				}
 			}
-			if( added ) {
-				break;
-			}
 		}
+
+		return added;
 	}
 
 	public static void addSolar(int no, float priceModifier) {
@@ -81,7 +86,7 @@ public class World {
 		}
 
 		for(int i = 0; i < no; i++) {
-			add(LOT_SOLAR, powerLots);
+			add(LOT_SOLAR, powerLots, noBatteries + noSolarPanels);
 			PowerManager.addSolarPanel();
 			noSolarPanels++;
 		}
@@ -93,7 +98,7 @@ public class World {
 		}
 
 		for(int i = 0; i < no; i++) {
-			add(LOT_BATTERY, powerLots);
+			add(LOT_BATTERY, powerLots, noBatteries + noSolarPanels);
 			PowerManager.addBattery();
 			noBatteries++;
 		}
@@ -105,7 +110,7 @@ public class World {
 		}
 
 		for(int i = 0; i < no; i++) {
-			add(LOT_HOTEL, hotelLots);
+			add(LOT_HOTEL, hotelLots, noHotels);
 			GameLogic.buildings++;
 			PowerManager.addEnergyUser();
 			noHotels++;
