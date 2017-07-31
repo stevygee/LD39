@@ -9,8 +9,8 @@ public class GameLogic {
 	static boolean isDay = true;
 	static int currentDay = 1;
 
-	static int goalDay = 3;
-	static int goalGuests = 10;
+	static int goalDay = 30;
+	static int goalGuests = 500;
 	static boolean gameOver = false;
 
 	static int guests = 0;
@@ -70,9 +70,9 @@ public class GameLogic {
 				Gdx.app.log("GameLogic", "buffer " + i + ": " + guestsBuffer.get(i));
 			}*/
 			if( currentDay == 1 ) {
-				UI.status = "Welcome to your new island! Try to get " + goalGuests + " guests in " + goalDay + " days!";
+				UI.status = "Welcome to your new island! Try to accommodate " + goalGuests + " guests by day " + goalDay + "!";
 			} else {
-				UI.status = "Good morning! " + arriving + " guests come to the island, " + leaving + " left.";
+				UI.status = "Good morning! " + arriving + " guests arrived, " + leaving + " left.";
 			}
 			Gdx.app.log("GameLogic", UI.status);
 			Gdx.app.log("GameLogic", guests + " guests are on the island.");
