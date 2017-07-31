@@ -54,7 +54,7 @@ public class GameLogic {
 			Gdx.app.log("GameLogic", "Good morning! " + arriving + " guests come to the island, " + leaving + " left.");
 			Gdx.app.log("GameLogic", guests + " guests are on the island.");
 
-			Day.init();
+			Day.reset();
 		}
 
 		// Updates during Day / Night

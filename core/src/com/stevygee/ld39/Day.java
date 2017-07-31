@@ -22,12 +22,18 @@ public class Day {
 	static boolean musicPlaying = false;
 
 	public static void init() {
+		reset();
+		bgTex = new Texture("InselTag.png");
+		music = Gdx.audio.newMusic(Gdx.files.internal("DailyChill.mp3"));
+		music.setLooping(true);
+	}
+
+	public static void reset() {
+
 		active = true;
 		hasEnded = false;
 		time = 0;
 
-		bgTex = new Texture("InselTag.png");
-		music = Gdx.audio.newMusic(Gdx.files.internal("DailyChill.mp3"));
 	}
 
 	public static void update(float delta) {
@@ -45,7 +51,7 @@ public class Day {
 				time = 0;
 				hasEnded = true;
 
-				music.stop();
+				music.pause();
 				musicPlaying = false;
 			} else {
 				// Charging batteries
