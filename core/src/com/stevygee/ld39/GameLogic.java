@@ -69,23 +69,28 @@ public class GameLogic {
 			/*for(int i = 0; i < guestsBuffer.size; i++) {
 				Gdx.app.log("GameLogic", "buffer " + i + ": " + guestsBuffer.get(i));
 			}*/
-			Gdx.app.log("GameLogic", "Good morning! " + arriving + " guests come to the island, " + leaving + " left.");
+			if( currentDay == 1 ) {
+				UI.status = "Welcome to your new island! Try to get " + goalGuests + " guests in " + goalDay + " days!";
+			} else {
+				UI.status = "Good morning! " + arriving + " guests come to the island, " + leaving + " left.";
+			}
+			Gdx.app.log("GameLogic", UI.status);
 			Gdx.app.log("GameLogic", guests + " guests are on the island.");
 
 			if( currentDay >= goalDay ) {
 				gameOver = true;
-			} else {
+			}
 				Day.reset();
 				currentDay++;
-			}
 		}
 
 		if( gameOver ) {
 			if( guests >= goalGuests ) {
-				Gdx.app.log("GameLogic", "You won!");
+				UI.status = "You won!";
 			} else {
-				Gdx.app.log("GameLogic", "Try again!");
+				UI.status = "Not enough guests, try again!";
 			}
+			//Gdx.app.log("GameLogic", UI.status);
 			return;
 		}
 
