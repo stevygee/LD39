@@ -38,9 +38,9 @@ public class World {
 
 	public static void init() {
 		powerLots = new int[8][1];
-		hotelLots = new int[10][4];
+		hotelLots = new int[10][5];
 
-		hotelPosition = new Vector2(4,4);
+		hotelPosition = new Vector2(4,3);
 		powerPosition = new Vector2(4,6);
 
 		texBatteryDay = new Texture("BatteryTag.png");
