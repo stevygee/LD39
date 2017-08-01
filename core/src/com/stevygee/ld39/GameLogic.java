@@ -1,6 +1,7 @@
 package com.stevygee.ld39;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.utils.IntArray;
@@ -15,8 +16,10 @@ public class GameLogic {
 
 	static int guests = 0;
 	static IntArray guestsBuffer;
-	static int buildings = 1;
+	static int buildings = 2;
 	static int funds = 10000;
+
+	static Sound sndHorn;
 
 	public static void init() {
 		Day.init();
@@ -26,10 +29,12 @@ public class GameLogic {
 
 		World.addHotel(buildings, 0);
 		World.addBattery(1, 0);
-		World.addSolar(1, 0);
+		World.addSolar(2, 0);
 
 		int[] weekDays = {0,0,0,0,0,0,0};
 		guestsBuffer = new IntArray(weekDays);
+
+		sndHorn = Gdx.audio.newSound(Gdx.files.internal("horn.ogg"));
 	}
 
 	public static void update(float delta) {
@@ -72,6 +77,9 @@ public class GameLogic {
 			if( currentDay == 1 ) {
 				UI.status = "Welcome to your new island! Try to accommodate " + goalGuests + " guests by day " + goalDay + "!";
 			} else {
+
+				sndHorn.play();
+
 				UI.status = "Good morning! " + arriving + " guests arrived, " + leaving + " left.";
 			}
 			Gdx.app.log("GameLogic", UI.status);
@@ -80,8 +88,9 @@ public class GameLogic {
 			if( currentDay >= goalDay ) {
 				gameOver = true;
 			}
-				Day.reset();
-				currentDay++;
+
+			Day.reset();
+			currentDay++;
 		}
 
 		if( gameOver ) {

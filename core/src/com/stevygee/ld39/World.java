@@ -1,5 +1,7 @@
 package com.stevygee.ld39;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
@@ -36,12 +38,16 @@ public class World {
 	static Texture texHotelNight;
 	static Texture texHotelNightNoPower;
 
+	static Sound sndBuild;
+
 	public static void init() {
-		powerLots = new int[8][1];
+		sndBuild = Gdx.audio.newSound(Gdx.files.internal("build.ogg"));
+
+		powerLots = new int[16][1];
 		hotelLots = new int[10][5];
 
-		hotelPosition = new Vector2(4,3);
-		powerPosition = new Vector2(4,6);
+		hotelPosition = new Vector2(4,3.25f);
+		powerPosition = new Vector2(4,5.8f);
 
 		texBatteryDay = new Texture("BatteryTag.png");
 		texBatteryNight = new Texture("BatteryNacht.png");
@@ -75,6 +81,10 @@ public class World {
 					break;
 				}
 			}
+		}
+
+		if( added ) {
+			sndBuild.play();
 		}
 
 		return added;
@@ -137,17 +147,17 @@ public class World {
 
 		// Render power layer
 		for(int i = 0; i < powerLots.length; i++) {
-			for(int j = 0; j < powerLots[i].length; j++) {
-				x = (powerPosition.x + i) * 32f;
-				y = (powerPosition.y + j) * 32f;
+			for (int j = 0; j < powerLots[i].length; j++) {
+				x = (powerPosition.x * 32f) + (i * 16f);
+				y = (powerPosition.y * 32f) + (j * 16f);
 
-				if( powerLots[i][j] == LOT_BATTERY ) {
+				if (powerLots[i][j] == LOT_BATTERY) {
 					batch.begin();
-					batch.draw(texBattery, x, y);
+					batch.draw(texBattery, x, y, 16f, 16f, 0, 0, 32, 32, false, false);
 					batch.end();
-				} else if( powerLots[i][j] == LOT_SOLAR ) {
+				} else if (powerLots[i][j] == LOT_SOLAR) {
 					batch.begin();
-					batch.draw(texSolar, x, y);
+					batch.draw(texSolar, x, y, 16f, 16f, 0, 0, 32, 32, false, false);
 					batch.end();
 				}
 			}

@@ -10,7 +10,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
 public class Day {
-	public static final float LENGTH = 1f;
+	public static final float LENGTH = 2f;
 
 	public static boolean hasEnded;
 	public static boolean active;
@@ -21,14 +21,18 @@ public class Day {
 
 	static Music music;
 	static boolean musicPlaying = false;
+
 	static Sound sndCharge;
 	static boolean sndChargePlaying = false;
 
 	public static void init() {
 		reset();
+
 		bgTex = new Texture("InselTag.png");
+
 		music = Gdx.audio.newMusic(Gdx.files.internal("DailyChill.mp3"));
 		music.setLooping(true);
+
 		sndCharge = Gdx.audio.newSound(Gdx.files.internal("charge.ogg"));
 	}
 
@@ -59,6 +63,7 @@ public class Day {
 
 				music.pause();
 				musicPlaying = false;
+				sndCharge.stop();
 			} else {
 				// Charging batteries
 				if( !sndChargePlaying ) {
