@@ -27,9 +27,9 @@ public class GameLogic {
 		World.init();
 		PowerManager.init();
 
-		World.addHotel(buildings, 0);
-		World.addBattery(1, 0);
-		World.addSolar(2, 0);
+		World.addHotel(buildings, 0, false);
+		World.addBattery(1, 0, false);
+		World.addSolar(2, 0, false);
 
 		int[] weekDays = {0,0,0,0,0,0,0};
 		guestsBuffer = new IntArray(weekDays);

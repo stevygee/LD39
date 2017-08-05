@@ -19,15 +19,15 @@ public class Input implements InputProcessor {
 			}
 
 			if( keycode == Keys.NUM_1 ) {
-				World.addBattery(1, 1);
+				World.addBattery(1, 1, true);
 			}
 
 			if( keycode == Keys.NUM_2 ) {
-				World.addSolar(1, 1);
+				World.addSolar(1, 1, true);
 			}
 
 			if( keycode == Keys.NUM_3 ) {
-				World.addHotel(1, 1);
+				World.addHotel(1, 1, true);
 			}
 		}
 		return false;

@@ -83,26 +83,30 @@ public class World {
 			}
 		}
 
-		if( added ) {
-			sndBuild.play();
-		}
-
 		return added;
 	}
 
-	public static void addSolar(int no, float priceModifier) {
+	public static void addSolar(int no, float priceModifier, boolean sound) {
+		boolean added = false;
+
 		if( !GameLogic.spendMoney(SOLAR_PRICE * priceModifier) ) {
 			return;
 		}
 
 		for(int i = 0; i < no; i++) {
-			add(LOT_SOLAR, powerLots, noBatteries + noSolarPanels);
+			added = add(LOT_SOLAR, powerLots, noBatteries + noSolarPanels);
 			PowerManager.addSolarPanel();
 			noSolarPanels++;
 		}
+
+		if( /*added && */sound ) {
+			sndBuild.play();
+		}
 	}
 
-	public static void addBattery(int no, float priceModifier) {
+	public static void addBattery(int no, float priceModifier, boolean sound) {
+		boolean added = false;
+
 		if( !GameLogic.spendMoney(BATTERY_PRICE * priceModifier) ) {
 			return;
 		}
@@ -112,9 +116,15 @@ public class World {
 			PowerManager.addBattery();
 			noBatteries++;
 		}
+
+		if( /*added && */sound ) {
+			sndBuild.play();
+		}
 	}
 
-	public static void addHotel(int no, float priceModifier) {
+	public static void addHotel(int no, float priceModifier, boolean sound) {
+		boolean added = false;
+
 		if( !GameLogic.spendMoney(HOTEL_PRICE * priceModifier) ) {
 			return;
 		}
@@ -124,6 +134,10 @@ public class World {
 			GameLogic.buildings++;
 			PowerManager.addEnergyUser();
 			noHotels++;
+		}
+
+		if( /*added && */sound ) {
+			sndBuild.play();
 		}
 	}
 
