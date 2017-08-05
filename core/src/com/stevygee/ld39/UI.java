@@ -2,10 +2,12 @@ package com.stevygee.ld39;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.utils.Align;
 
 public class UI {
 	private static BitmapFont guiFont = null;
@@ -67,11 +69,12 @@ public class UI {
 
 		// Build menu
 		if( GameLogic.isDay ) {
-			text = "1: Build battery ($ " + World.BATTERY_PRICE + ") ";
+			text = "Press ENTER to end turn\n";
+			text = text + "1: Build battery ($ " + World.BATTERY_PRICE + ") ";
 			text = text + "2: Build solar panel ($ " + World.SOLAR_PRICE + ") ";
 			text = text + "3: Build hotel ($ " + World.HOTEL_PRICE + ")";
-			layout.setText(guiFont, text);
-			guiFont.draw(batch, layout, w * 0.5f - layout.width * 0.5f, 20);
+			layout.setText(guiFont, text, guiFont.getColor(), PartyIsland.NATIVE_WIDTH, Align.center, false);
+			guiFont.draw(batch, layout, 0, 30);
 		}
 
 		// Status
