@@ -80,7 +80,10 @@ public class GameLogic {
 
 				sndHorn.play();
 
-				UI.status = "Good morning! " + arriving + " guests arrived, " + leaving + " left.";
+				UI.status = "Good morning! " + arriving + " guests arrived";
+				UI.status = (regularLeaving > 0) ? UI.status + ", " + regularLeaving + " checked out" : UI.status;
+				UI.status = (angryLeaving > 0) ? UI.status + ", " + angryLeaving + " left early" : UI.status;
+				UI.status = UI.status + ".";
 			}
 			Gdx.app.log("GameLogic", UI.status);
 			Gdx.app.log("GameLogic", guests + " guests are on the island.");
